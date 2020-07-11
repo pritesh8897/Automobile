@@ -1,0 +1,21 @@
+{% extends 'base2.html' %}
+    {% block body %}
+<!--    <p>owner details is working.</p>-->
+
+<!--    <p> clickable name is {{owner.owner.first_name}} </p>-->
+    <h2 style="text-align:center">User Profile Card</h2>
+
+    <div class="card">
+<!--      <img src="/w3images/team2.jpg" alt="John" style="width:100%">-->
+      <h1>{{owner.owner.first_name}}{{owner.owner.last_name}}</h1>
+      <p class="title">{{owner.car_info.name}}</p>
+      <p>{{owner.car_info.details}}</p>
+      <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+      </div>
+      <p><button>Contact</button></p>
+
+    {% endblock body %}

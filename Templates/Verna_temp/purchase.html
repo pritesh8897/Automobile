@@ -1,0 +1,51 @@
+{% extends 'base2.html' %}
+{% block body %}
+<div class="container-xl">
+	<div class="table-responsive">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>Purchase list of <b>owner</b></h2>
+					</div>
+					<div class="col-sm-6">
+						<a href="{% url 'Verna:owner_view' %}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Create owner info</span></a>
+						<a href="{% url 'Verna:car_view' %}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Create car info</span></a>
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						        <th>owner id</th>
+            					<th>owner name</th>
+            					<th>car name</th>
+            					<th>car detail</th>
+            					<th>car price</th>
+            					<th>car designer</th>
+            					<th> Edit </th>
+            					<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+
+                <tr>
+                        {% for customer in purchase %}
+            						<td><a href="{% url 'Verna:owner_detail' customer.id %}">{{ customer.id }}</a></td>
+            						<td>{{ customer }}</td>
+            						<td>{{ customer.car_info }}</td>
+            						<td>{{ customer.car_info.details }}</td>
+            						<td>{{ customer.car_info.price }}</td>
+            						<td>{{ customer.car_info.design }}</td>
+            						<td> <a href = "{% url 'Verna:owner_Edit' customer.id %}">
+                                        <button class="button button1">Edit</button></a>
+           						    </td>
+            						<td><a href = "{% url 'Verna:owner_Delete' customer.id %}">
+                                        <button class="button button2">Delete</button></a>
+             						</td>
+                </tr>
+						{% endfor %}
+				</tbody>
+			</table>
+
+{% endblock body %}

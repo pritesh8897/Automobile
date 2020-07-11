@@ -1,0 +1,13 @@
+{% extends 'base2.html' %}
+    {% block body %}
+
+    <form method = 'POST'>
+        {% csrf_token %}
+        <div> Are you sure want to Delete this owner's record. </div>
+
+        <button style="width: 10%" class="button button3">Delete</button>
+
+        <a href = '/'><button style="width: 10%" class="button button3">Cancle</button>
+    </form>
+
+    {% endblock body %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+    {% block body %}
+
+    <h2 style="text-align:center">User Profile Card</h2>
+
+    <div class="card">
+      <h1>{{car.name}}</h1>
+      <p class="title">{{car.price}}</p>
+      <p>{{car.details}}</p>
+      <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+      </div>
+      <p><button>Contact</button></p>
+
+    {% endblock body %}

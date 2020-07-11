@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>car information list</h1>
+<p>{{current_time}}</p>
+<p>{{current_date}}</p>
+
+
+<table>
+    <tr>
+        <th>car id</th>
+        <th>car name</th>
+        <th>car detail</th>
+        <th>car price</th>
+        <th>car design</th>
+    </tr>
+
+    {% for cars in car %}
+    <tr>
+        <td><a href="{% url 'Verna:car_detail' cars.id %}">{{ cars.id }}</a></td>
+        <td>{{cars.name}}</td>
+        <td>{{cars.details}}</td>
+        <td>{{cars.price}}</td>
+        <td>{{cars.design}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock body%}
