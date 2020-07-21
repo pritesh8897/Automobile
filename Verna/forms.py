@@ -11,3 +11,10 @@ class CarInformationForm(forms.ModelForm):
     class Meta:
         model = CarInformation
         fields = '__all__'
+
+# ******* for creating contact form using Formview ********
+class ContactForm(forms.Form):
+    username = forms.CharField(max_length=20)
+    first_name = forms.CharField(max_length=15)
+    last_name = forms.CharField(max_length=15)
+    email = forms.EmailField()

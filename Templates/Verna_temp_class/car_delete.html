@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+    {% block body %}
+
+    <form method = 'POST'>
+        {% csrf_token %}
+        <div> Are you sure want to Delete this car's record. </div>
+
+        <button type="submit" style="width: 10%" class="button button3">Delete</button>
+
+        <a href="/"> <button style="width: 5%">Cancel</button> </a>
+    </form>
+
+    {% endblock body %}

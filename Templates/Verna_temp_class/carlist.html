@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>car information list</h1>
-<p>{{current_time}}</p>
-<p>{{current_date}}</p>
-
+    <h1>car information list</h1>
+    <div><a href="{% url 'Verna:create' %}">carinformation create</a></div>
+    <p>{{current_time}}</p>
+    <p>{{current_date}}</p>
 
 <table>
     <tr>
@@ -12,6 +12,8 @@
         <th>car detail</th>
         <th>car price</th>
         <th>car design</th>
+        <th>car Edit</th>
+        <th>car Delete</th>
     </tr>
 
     {% for cars in car %}
@@ -21,9 +23,9 @@
         <td>{{cars.details}}</td>
         <td>{{cars.price}}</td>
         <td>{{cars.design}}</td>
+        <td> <a href = "{% url 'Verna:car_edit' cars.id %}">Edit</a></td>
+        <td> <a href = "{% url 'Verna:car_delete' cars.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>
-
-
 {% endblock body%}

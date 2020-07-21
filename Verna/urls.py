@@ -13,10 +13,16 @@ urlpatterns = [
     path('carinformation/create',views.CarInformationcreateview,name='car_view'),
     path('owner/Edit/<int:customer_id>',views.OwnerEditview,name='owner_Edit'),
     path('owner/Delete/<int:customer_id>',views.OwnerDeleteview,name='owner_Delete'),
+    path('contact',views.contactview.as_view(),name='contact_page'),
+
 
 
 
     # path('',views.carlistclassbasedview.as_view()),
-    # path('cardetail/<int:pk>/',views.cardetailview.as_view(),name='car_detail'),
+    # path('cardetail/<int:car_id>/',views.cardetailview.as_view(),name='car_detail'),
+    # path('car/create',views.carinfocreateview.as_view(),name='create' ),
+    # path('caredit/<int:pk>/',views.careditview.as_view(),name='car_edit'),
+    # path('cardelete/<int:car_id>/', views.cardeleteview.as_view(), name='car_delete'),
+    ##path('',views.welcome.as_view(),name = 'welcome')
 
 ]
