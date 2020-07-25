@@ -1,6 +1,11 @@
 from django import forms
 from Verna.models import OwnerInformation,CarInformation
 
+# ** for signup **
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+
 class OwnerInformationForm(forms.ModelForm):
     # email = forms.EmailField()
     class Meta:
@@ -18,3 +23,9 @@ class ContactForm(forms.Form):
     first_name = forms.CharField(max_length=15)
     last_name = forms.CharField(max_length=15)
     email = forms.EmailField()
+
+# *** for creating signup form ******
+class SignupForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username','first_name','last_name','email','password1','password2']

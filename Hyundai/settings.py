@@ -115,7 +115,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+# LOGIN_REDIRECT_URL = '/' #home page of your website (check your urls.py of Verna)
+LOGIN_REDIRECT_URL = '/Verna' #now redirect in verna.urls after login (check your urls.py of Verna)
 
+# LOGOUT_REDIRECT_URL = '/' #no need
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

@@ -1,17 +1,27 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from Verna.models import OwnerInformation,CarInformation
-from Verna.forms import OwnerInformationForm,CarInformationForm,ContactForm
+from Verna.forms import OwnerInformationForm,CarInformationForm,ContactForm,SignupForm
 import datetime
 from django.contrib.auth.models import User
 
-
 #*** for class based crud operation *****
-from django.views.generic import (ListView,DetailView,CreateView,UpdateView,DeleteView,TemplateView,FormView)
+from django.views.generic import (ListView,DetailView,CreateView,UpdateView,DeleteView,TemplateView,FormView,RedirectView)
+
+#***** for validation of login ***********
+from django.contrib.auth.decorators import login_required #for functions based views
+# from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin #for class based views
+
+# ******* for logout *********
+from django.contrib.auth import logout
+
+
 # Create your views here.
 def Form(request):
     return render(request,'base.html',{'title':'java'},)
 
+@login_required(login_url='/')
 def PurchaseInformation(request):
     purchase_list = OwnerInformation.objects.all()
     #purchase_list = OwnerInformation.objects.filter(car_info__design = 'pooja kumari')
@@ -74,12 +84,13 @@ def OwnerDeleteview(request,customer_id):
 #************ class based crud operation *************
 
 #*** List view **********
-
-class carlistclassbasedview(ListView):
+# @method_decorator(login_required,name='car_list')
+class carlistclassbasedview(LoginRequiredMixin,ListView):
     model = CarInformation
     paginate_by = 20
     template_name = 'Verna_temp_class/carlist.html'
     context_object_name = 'car'
+    login_url = '/'
 
     # def get_queryset(self):
     #     query = CarInformation.objects.filter(price='1200000')
@@ -96,11 +107,12 @@ class carlistclassbasedview(ListView):
     #     return context
 
 #******** classbased detail view ***********
-class cardetailview(DetailView):
+class cardetailview(DetailView,LoginRequiredMixin):
     model = CarInformation
     template_name = 'Verna_temp_class/cardetail.html'
     context_object_name = 'car'
     pk_url_kwarg = 'car_id'
+    login_url = '/'
 
 #******** classbased create view **************
 class carinfocreateview(CreateView):
@@ -116,14 +128,14 @@ class careditview(UpdateView):
     form_class = CarInformationForm
     template_name = 'Verna_temp_class/car_edit.html'
     #pk_url_kwarg = 'car_id'
-    success_url = '/'
+    success_url = '/Verna'
 
 #********* class Delete view ****************
 class cardeleteview(DeleteView):
     model = CarInformation
     template_name = 'Verna_temp_class/car_delete.html'
     pk_url_kwarg = 'car_id'
-    success_url = '/'
+    success_url = '/Verna'
 
 # ********* Template view ************
 class welcome(TemplateView):
@@ -143,7 +155,7 @@ class contactview(FormView):
         last_name = form.cleaned_data.get('last_name')
         email = form.cleaned_data.get('email')
 
-        # print(usernames)
+        # print(username)
 
         user_obj = User(
             username=username,
@@ -155,4 +167,27 @@ class contactview(FormView):
         user_obj.save()
         return super().form_valid(form)
 
+# *** for signupview *********
+class signupview(CreateView):
+    model = User
+    form_class = SignupForm
+    template_name = 'registration/signup.html'
+    success_url = '/Verna' ##if you want to redirect home or listing page of Verna after fillup signup form.. use this url
+    # success_url = '/' #if you want to redirect login page after fillup signup form.. use this url
 
+
+
+# *** function based logout view ****
+def LogoutfunView(request):
+    logout = (request)
+    return redirect ('/')
+
+#*** class based logout view ***
+class LogoutfunView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'login'
+
+    def get_redirect_url(self, *args, **kwargs):
+        logout(self.request)
+        return super(LogoutfunView,self).get_redirect_url(self, *args, **kwargs)

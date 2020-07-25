@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.contrib.auth.views import LoginView,LogoutView
+from Verna.views import signupview,LogoutfunView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',include('specs.urls')),
-    path('',include('Verna.urls')),
+    path('Verna',include('Verna.urls')),
+    path('',LoginView.as_view(),name = 'login'),
+    path('signup',signupview.as_view(),name = 'signup'),
+    path('logout',LogoutfunView.as_view(),name = 'logout'),
 
 ]
